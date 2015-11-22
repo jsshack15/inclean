@@ -3,9 +3,7 @@ angular
 
 
     .module('app', ['angularFileUpload'])
-
-
-    .controller('AppController', ['$http','$scope','FileUploader', function($http,$scope, FileUploader) {
+     .controller('AppController', ['$http','$scope','FileUploader', function($http,$scope, FileUploader) {
 		$scope.desc='';
 		$scope.loc='';
 	var uploader = $scope.uploader = new FileUploader({
@@ -23,4 +21,22 @@ angular
 	$scope.uploader.onSuccessItem = function(fileItem, response, status, headers) {
             console.info('onSuccessItem', fileItem, response, status, headers);
         };
-}]);
+}])
+    .controller('search',['$http','$scope',function($http,$scope){
+    	$scope.userlist='';
+    	$scope.piclist='';
+    	$scope.loca='';
+    	$scope.fetchusers = function()
+    	{
+    		$http.put('/search/users/' + $scope.loca).then(function(response) {
+    			$scope.userlist = response.data;
+    		});
+    	};
+    	$scope.fetchpics = function()
+    	{
+    		$http.put('/search/pics/' + $scope.loca).then(function(response) {
+    			$scope.piclist = response.data;
+    			console.log(response.data);
+    		});
+    	};
+    }]);

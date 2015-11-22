@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html ng-app="app">
+	<head>
+		<title>IClean Lens</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="../css/main1.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-loading-0 is-loading-1 is-loading-2" ng-controller='search'>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>Lens</h1>
+						<p>Discover places</p>
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+						</ul>
+					</header>
+          <input class="form-control" ng-model="loca">
+    <button class="btn btn-primary" ng-click="fetchpics()">Search</button>
+				<!-- Thumbnail -->
+					<section id="thumbnails">
+						<article ng-repeat="contact in piclist">
+							<a class="thumbnail" href="../images/c.png" data-position="left center"><img src="../images/c.png" alt="" /></a>
+							<h2>{{contact.loc}}</h2>
+							<p>{{contact.desc}}</p>
+						</article>
+					
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../js/jquery.min.js"></script>
+			<script src="../js/skel.min.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="../js/main1.js"></script>
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="../js/angular-file-upload.js"></script>
+    <script src="../js/controller.js"></script>
+
+	</body>
+</html>

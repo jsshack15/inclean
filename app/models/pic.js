@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 var picSchema = mongoose.Schema({
     desc: String,
     loc: String,
-    photo: Buffer
-});
+    photo: String
+},{ collection : 'pics' });
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('pic', picSchema);

@@ -1,5 +1,5 @@
-var pic       = require('./models/pic.js');
-
+var pic       = require('./models/pic');
+var User       = require('./models/user');
 module.exports = function(app,express,upload) {
 	//app.use(express.static(__dirname + '/js'))
 
@@ -25,24 +25,52 @@ module.exports = function(app,express,upload) {
 		res.sendFile(__dirname + '/about.html');
 	});
 	app.post('/upload/',upload.any(),function(req,res){
-		console.log(req.headers);
-		console.log(req.body);
+		console.log(req.body.loc);
+		var newpic = new pic();
+		newpic.desc = req.body.desc;
+		newpic.loc = req.body.loc;
 		var data = new Buffer('');
-		req.on('data',function(chunk){
-			data = Buffer.concat([data, chunk]);
-			console.log(req.headers);
-		});
-		req.on('end',function(){
-			console.log(data);
-			console.log(req.params);
-			console.log(req.headers);
-			var newpic = new pic();
-			newpic.photo = data;
+		console.log(req.files);
+			var buffer = req.files[0].buffer;
+			newpic.photo = 'data:' + req.files[0].mimetype +';base64,'+ buffer.toString('base64');
 			//TODO add desc and loc from req
+			console.log(newpic);
 			newpic.save(function(err){
 				if(err)
-					throw err;
+					console.log(err);
 			});
+	});
+	app.get('/searchu',function(req,res){
+		res.sendFile(__dirname + '/searchusers.html');
+	})
+	app.get('/searchl',function(req,res){
+		res.sendFile(__dirname + '/searchloc.html')
+	})
+	app.get('/add/user:name', function(req,res){
+		var newUser = new User();
+		newUser.name = req.params.name;
+		newUser.loc = 'vasantvihar';
+		newUser.save(function(err){
+			if(err)
+				console.log(err);
+		});
+	});
+	app.put('/search/pics/:loc',function(req,res){
+		var loc = req.params.loc;
+		pic.find({'loc' : loc},function(err,docs){
+			if(err)
+				console.log(err);
+
+			res.json(docs);
+		});
+	});
+	app.put('/search/users/:loc',function(req,res){
+		var loc = req.params.loc;
+		User.find({'loc': loc},function(err,docs){
+		if(err)
+				console.log(err);
+
+				res.json(docs);	
 		});
 	});
 /*

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+  </head>
+  <body ng-controller="search">
+    <h1>Hello, world!</h1>
+    <input class="form-control" ng-model="loca">
+    <button class="btn btn-primary" ng-click="fetchpics()">Search</button>
+    <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="contact in piclist">
+        <td><img ng-src="{{contact.photo}}"></td>
+    </tbody>
+  
+    <!-- jQuery first, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+    <script src="http://code.angularjs.org/1.1.5/angular.min.js"></script>
+    <script src="../js/angular-file-upload.js"></script>
+    <script src="../js/controller.js"></script>
+  </body>
+</html>
